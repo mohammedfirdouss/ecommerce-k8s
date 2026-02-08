@@ -179,3 +179,111 @@ go run .
 - **Orchestration**: Kubernetes (Kind)
 - **Ingress**: NGINX Ingress Controller
 - **Monitoring**: Prometheus + Grafana
+- **GitOps**: ArgoCD (declarative, Git-driven deployments)
+
+## GitOps Deployment (ArgoCD)
+
+This project supports **GitOps** using [ArgoCD](https://argo-cd.readthedocs.io/), where the Git repository is the single source of truth for all Kubernetes deployments.
+
+### How It Works
+
+```
+Git Push → ArgoCD detects change → Auto-syncs to cluster
+```
+
+ArgoCD watches the `k8s/base/` directory structure:
+- `k8s/base/infra/` — Namespace, secrets, PostgreSQL, RabbitMQ
+- `k8s/base/services/` — All microservices, UI, Ingress
+- `k8s/base/monitoring/` — Prometheus, Grafana
+
+Three ArgoCD Applications are managed via an **App of Apps** pattern:
+1. **ecommerce-infra** — Infrastructure layer (sync wave 1)
+2. **ecommerce-services** — Microservices layer (sync wave 2)
+3. **ecommerce-monitoring** — Observability layer (sync wave 3)
+
+### Setup GitOps
+
+```bash
+# 1. Set up cluster and build images (still needed for Kind)
+make setup && make build
+
+# 2. Install ArgoCD
+make gitops-install
+
+# 3. Deploy via ArgoCD (app of apps)
+make gitops-deploy
+
+# 4. Check sync status
+make gitops-status
+```
+
+### Access ArgoCD Dashboard
+
+```bash
+# Get admin password
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d; echo
+
+# Port-forward to ArgoCD UI
+kubectl port-forward svc/argocd-server -n argocd 9090:443
+```
+Then open: **https://localhost:9090** (username: `admin`)
+
+### GitOps Workflow
+
+Once ArgoCD is set up, deployments are driven by Git:
+
+1. **Make changes** to manifests in `k8s/base/`
+2. **Commit and push** to the repository
+3. **ArgoCD auto-syncs** the changes to the cluster
+4. **Self-healing**: If someone manually changes a resource, ArgoCD reverts it
+
+> **Note**: Image builds still require `make build` since Kind uses local images. In a cloud environment with a container registry, ArgoCD would handle the full pipeline.
+
+## Project Structure
+
+```
+├── Makefile                    # Build, deploy, test, GitOps targets
+├── README.md
+├── docs/                       # Architecture & deployment docs
+├── k8s/
+│   ├── argocd/                 # ArgoCD Application manifests
+│   │   ├── project.yaml        # ArgoCD AppProject
+│   │   ├── app-of-apps.yaml    # Parent application
+│   │   ├── app-infra.yaml      # Infrastructure app
+│   │   ├── app-services.yaml   # Services app
+│   │   └── app-monitoring.yaml # Monitoring app
+│   ├── base/                   # GitOps source of truth
+│   │   ├── infra/              # PostgreSQL, RabbitMQ, namespace, secrets
+│   │   ├── services/           # Microservice deployments + UI + Ingress
+│   │   └── monitoring/         # Prometheus + Grafana
+│   ├── namespace.yaml          # (legacy manual deploy)
+│   ├── secret.yaml
+│   ├── postgres/
+│   ├── rabbitmq/
+│   ├── services/
+│   ├── monitoring/
+│   ├── ui.yaml
+│   └── ingress.yaml
+├── scripts/
+│   ├── setup-cluster.sh        # Kind cluster + NGINX Ingress
+│   ├── build-images.sh         # Build all Docker images
+│   ├── deploy-all.sh           # Manual deployment script
+│   ├── install-argocd.sh       # ArgoCD installation
+│   └── test-e2e.sh             # End-to-end test suite
+├── services/                   # Go microservices source code
+│   ├── auth/
+│   ├── product/
+│   ├── cart/
+│   ├── order/
+│   └── payment/
+└── ui/                         # Web frontend
+    ├── Dockerfile
+    ├── nginx.conf
+    ├── index.html
+    └── static/
+        ├── css/styles.css
+        └── js/
+            ├── api.js          # API client module
+            ├── app.js          # App logic & state
+            └── ui.js           # UI rendering functions
+```

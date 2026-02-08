@@ -20,6 +20,9 @@ kubectl wait --namespace "${NAMESPACE}" --for=condition=ready pod -l app=rabbitm
 echo "==> Deploying microservices"
 kubectl apply -f k8s/services/
 
+echo "==> Deploying UI"
+kubectl apply -f k8s/ui.yaml
+
 echo "==> Deploying Ingress"
 kubectl apply -f k8s/ingress.yaml
 

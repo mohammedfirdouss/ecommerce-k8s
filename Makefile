@@ -1,4 +1,4 @@
-.PHONY: setup teardown build deploy deploy-infra deploy-services deploy-monitoring undeploy test clean
+.PHONY: setup teardown build deploy deploy-infra deploy-services deploy-monitoring undeploy test clean gitops-install gitops-deploy gitops-status
 
 CLUSTER_NAME := ecommerce
 NAMESPACE := ecommerce
@@ -25,6 +25,7 @@ deploy-infra:
 
 deploy-services:
 	kubectl apply -f k8s/services/
+	kubectl apply -f k8s/ui.yaml
 	kubectl apply -f k8s/ingress.yaml
 
 deploy-monitoring:
@@ -37,3 +38,21 @@ test:
 	./scripts/test-e2e.sh
 
 clean: undeploy teardown
+
+# ---- GitOps with ArgoCD ----
+
+gitops-install:
+	./scripts/install-argocd.sh
+
+gitops-deploy:
+	kubectl apply -f k8s/argocd/project.yaml
+	kubectl apply -f k8s/argocd/app-of-apps.yaml
+	@echo "ArgoCD will now sync all applications from Git."
+	@echo "Monitor: kubectl port-forward svc/argocd-server -n argocd 9090:443"
+
+gitops-status:
+	@echo "==> ArgoCD Applications:"
+	kubectl get applications -n argocd
+	@echo ""
+	@echo "==> Ecommerce Pods:"
+	kubectl get pods -n $(NAMESPACE)
