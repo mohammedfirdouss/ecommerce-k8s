@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Store</title>
+    <title>Firdous Shops - Premium E-Commerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,469 +14,920 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+        html, body {
+            height: 100%;
         }
         
-        .navbar {
-            background: #2c3e50;
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #F9F9F9;
+            color: #111111;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .top-bar {
+            background: #853B5C;
             color: white;
-            padding: 1rem 2rem;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 0 4px rgba(0,0,0,0.25);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 26px;
+            height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
-        .navbar h1 {
-            font-size: 1.5rem;
-        }
-        
-        .navbar-right {
+
+        .logo {
             display: flex;
-            gap: 1rem;
             align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #111;
         }
-        
-        .user-info {
-            font-size: 0.9rem;
-        }
-        
-        button {
-            background: #3498db;
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #853B5C 0%, #CE0631 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #853B5C;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .user-info {
+            font-size: 14px;
+            color: #605f64;
+        }
+
+        .cart-link {
+            position: relative;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #605f64;
+            font-size: 14px;
         }
-        
-        button:hover {
-            background: #2980b9;
+
+        .cart-icon {
+            width: 24px;
+            height: 24px;
         }
-        
-        button.danger {
-            background: #e74c3c;
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #853B5C;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 4px 4px 0 4px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        button.danger:hover {
-            background: #c0392b;
+
+        /* Buttons - Cymbal Style */
+        .cymbal-button-primary {
+            display: inline-block;
+            background: #CE0631;
+            color: white;
+            border: 1px solid #CE0631;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-family: inherit;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        button.success {
-            background: #27ae60;
+
+        .cymbal-button-primary:hover {
+            background: #7b031d;
+            border-color: #7b031d;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
-        button.success:hover {
-            background: #229954;
+
+        .cymbal-button-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #CE0631;
+            border: 1px solid #CE0631;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-family: inherit;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        .container {
-            max-width: 1200px;
+
+        .cymbal-button-secondary:hover {
+            color: #7b031d;
+            border-color: #7b031d;
+        }
+
+        .cymbal-button-small {
+            padding: 6px 14px;
+            font-size: 12px;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 40px 26px;
+            width: 100%;
         }
-        
+
         .screen {
             display: none;
         }
-        
+
         .screen.active {
             display: block;
         }
-        
-        .auth-form {
-            max-width: 400px;
-            margin: 2rem auto;
+
+        /* Auth Form */
+        .auth-container {
+            max-width: 440px;
+            margin: 60px auto;
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
         }
-        
-        label {
+
+        .auth-header h2 {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            color: #605f64;
+            font-size: 16px;
+        }
+
+        .cymbal-form-field {
+            margin-bottom: 20px;
+        }
+
+        .cymbal-form-field label {
             display: block;
-            margin-bottom: 0.5rem;
+            font-size: 12px;
+            color: #5C6063;
+            margin-bottom: 8px;
             font-weight: 500;
         }
-        
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="number"],
-        select {
+
+        .cymbal-form-field input {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+            padding: 14px 16px;
+            border: 1px solid #9AA0A6;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
         }
-        
-        input:focus,
-        select:focus {
+
+        .cymbal-form-field input:focus {
             outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 4px rgba(52, 152, 219, 0.3);
+            border-color: #CE0631;
         }
-        
-        .form-actions {
+
+        .auth-actions {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
         }
-        
-        .alert {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .alert.error {
-            background: #fadbd8;
-            color: #c0392b;
-            border: 1px solid #e74c3c;
-            display: block;
-        }
-        
-        .alert.success {
-            background: #d5f4e6;
-            color: #27ae60;
-            border: 1px solid #27ae60;
-            display: block;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .product-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-description {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .product-price {
-            font-size: 1.5rem;
-            color: #27ae60;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-stock {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-bottom: 1rem;
-        }
-        
-        .product-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        input.qty {
-            width: 60px;
-            padding: 0.5rem;
-        }
-        
-        .cart-section {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .cart-header {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 0.5rem;
-        }
-        
-        .cart-empty {
-            color: #7f8c8d;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .cart-items {
-            list-style: none;
-        }
-        
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            gap: 1rem;
-        }
-        
-        .cart-item-info {
+
+        .auth-actions button {
             flex: 1;
         }
-        
-        .cart-item-name {
-            font-weight: 600;
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            font-size: 14px;
         }
-        
-        .cart-item-qty {
-            color: #7f8c8d;
-            font-size: 0.9rem;
+
+        .alert.error {
+            background: #fce8e8;
+            color: #c0392b;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
-        
-        .cart-item-price {
-            font-weight: 600;
+
+        .alert.success {
+            background: #e8f5e8;
             color: #27ae60;
-            min-width: 100px;
-            text-align: right;
+            border: 1px solid #c3e6cb;
+            display: block;
         }
-        
-        .cart-summary {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #eee;
+
+        /* Products Grid */
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-header h3 {
+            font-size: 36px;
+            font-weight: 400;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 0;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-image-container {
+            position: relative;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20% 0 20% 20%;
+        }
+
+        .product-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border-radius: 20% 0 20% 20%;
+            transition: background 0.2s;
+        }
+
+        .product-card:hover .product-image-overlay {
+            background: rgba(71, 0, 29, 0.15);
+        }
+
+        .product-info {
+            padding: 16px 0;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #111;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #605f64;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 500;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .product-stock {
+            font-size: 13px;
+            color: #9AA0A6;
+            margin-bottom: 16px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .quantity-select {
+            position: relative;
+        }
+
+        .quantity-select select {
+            appearance: none;
+            padding: 10px 40px 10px 16px;
+            border: 1px solid #acacac;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+        }
+
+        .quantity-select::after {
+            content: '▼';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #605f64;
+            pointer-events: none;
+        }
+
+        /* Cart Section */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+        }
+
+        .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.2rem;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-header h3 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #605f64;
+        }
+
+        .cart-empty h4 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-sku {
+            font-size: 13px;
+            color: #9AA0A6;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-qty {
+            font-size: 14px;
+            color: #605f64;
+        }
+
+        .cart-item-price {
+            font-size: 16px;
             font-weight: 600;
+            text-align: right;
         }
-        
-        .cart-total {
-            color: #27ae60;
+
+        .cart-item-actions {
+            margin-top: 8px;
         }
-        
+
+        .cart-summary-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Orders Section */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .order-card {
             background: white;
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
+            overflow: hidden;
         }
-        
+
         .order-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            padding: 20px 24px;
             border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
+            background: #fafafa;
         }
-        
+
         .order-id {
             font-weight: 600;
-            color: #2c3e50;
+            font-size: 16px;
         }
-        
+
+        .order-date {
+            font-size: 13px;
+            color: #605f64;
+        }
+
         .order-status {
             display: inline-block;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
         }
-        
+
         .status-pending {
-            background: #ffeaa7;
-            color: #d63031;
+            background: #fff3cd;
+            color: #856404;
         }
-        
+
         .status-completed {
-            background: #d5f4e6;
-            color: #27ae60;
+            background: #d4edda;
+            color: #155724;
         }
-        
+
         .status-failed {
-            background: #fadbd8;
-            color: #c0392b;
+            background: #f8d7da;
+            color: #721c24;
         }
-        
+
+        .order-body {
+            padding: 24px;
+        }
+
         .order-items {
-            margin: 1rem 0;
-            padding: 0;
             list-style: none;
+            margin-bottom: 20px;
         }
-        
+
         .order-item {
-            padding: 0.5rem 0;
-            color: #555;
-            font-size: 0.9rem;
-        }
-        
-        .order-total {
-            text-align: right;
-            color: #27ae60;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-        
-        .tabs {
             display: flex;
-            gap: 1rem;
-            border-bottom: 2px solid #eee;
-            margin-bottom: 2rem;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #555;
         }
-        
-        .tab-button {
-            background: none;
-            color: #7f8c8d;
-            border: none;
-            padding: 1rem 0;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
         }
-        
-        .tab-button.active {
-            color: #3498db;
-            border-bottom-color: #3498db;
+
+        .order-actions {
+            margin-top: 16px;
         }
-        
-        .tab-content {
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #111;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
             display: none;
+            animation: slideIn 0.3s ease;
         }
-        
-        .tab-content.active {
+
+        .toast.show {
             display: block;
         }
-        
+
+        .toast.success {
+            background: #155724;
+        }
+
+        .toast.error {
+            background: #721c24;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Loading State */
         .loading {
             text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
+            padding: 60px;
+            color: #605f64;
         }
-        
-        .error-box {
-            background: #fadbd8;
-            color: #c0392b;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid #e74c3c;
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #CE0631;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
         }
-        
-        .success-box {
-            background: #d5f4e6;
-            color: #27ae60;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid #27ae60;
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Product Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal-image {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .modal-details {
+            padding: 40px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: #570D2E;
+            color: white;
+            padding: 40px 26px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 16px;
+            }
+            
+            main {
+                padding: 24px 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 24px;
+            }
+
+            .auth-container {
+                padding: 32px 24px;
+                margin: 24px auto;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>🛍️ E-Commerce Store</h1>
-        <div class="navbar-right">
-            <div class="user-info" id="userInfo"></div>
-            <button id="navLogout" onclick="logout()" style="display:none;">Logout</button>
-        </div>
+    <!-- Top Banner -->
+    <div class="top-bar" id="topBar">
+        ✨ Free shipping on orders over $50 — Limited time offer!
     </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo" onclick="goHome()">
+                <div class="logo-icon">🛍️</div>
+                <span class="logo-text">Cymbal Shops</span>
+            </a>
+            <div class="nav-controls">
+                <span class="user-info" id="userInfo"></span>
+                <div class="cart-link" id="cartLink" onclick="switchTab('cart')" style="display: none;">
+                    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </div>
+                <button id="navLogout" class="cymbal-button-secondary cymbal-button-small" onclick="logout()" style="display: none;">
+                    Sign Out
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <!-- Auth Screen -->
     <div id="authScreen" class="screen active">
-        <div class="auth-form">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Welcome to E-Commerce</h2>
+        <div class="auth-container">
+            <div class="auth-header">
+                <div style="font-size: 48px; margin-bottom: 16px;">🛍️</div>
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your account</p>
+            </div>
             
             <div id="authAlert" class="alert"></div>
             
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="authEmail" placeholder="your@email.com">
+            <div class="cymbal-form-field">
+                <label>Email Address</label>
+                <input type="email" id="authEmail" placeholder="you@example.com">
             </div>
             
-            <div class="form-group">
+            <div class="cymbal-form-field">
                 <label>Password</label>
-                <input type="password" id="authPassword" placeholder="••••••••">
+                <input type="password" id="authPassword" placeholder="Enter your password">
             </div>
             
-            <div class="form-actions">
-                <button onclick="login()" class="success">Login</button>
-                <button onclick="register()">Register</button>
+            <div class="auth-actions">
+                <button onclick="login()" class="cymbal-button-primary">Sign In</button>
+                <button onclick="register()" class="cymbal-button-secondary">Create Account</button>
             </div>
         </div>
     </div>
 
     <!-- Main App Screen -->
     <div id="appScreen" class="screen">
-        <div class="container">
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab-button active" onclick="switchTab('shop')">🛒 Shop</button>
-                <button class="tab-button" onclick="switchTab('cart')">🛍️ Cart</button>
-                <button class="tab-button" onclick="switchTab('orders')">📋 Orders</button>
-            </div>
-
-            <!-- Shop Tab -->
+        <main>
+            <!-- Navigation Tabs (hidden, controlled by header) -->
             <div id="shopTab" class="tab-content active">
-                <div style="margin-bottom: 1rem;">
-                    <h2>Products</h2>
+                <div class="section-header">
+                    <h3>Hot Products</h3>
                 </div>
-                <div id="productsList" class="grid"></div>
+                <div id="productsList" class="products-grid">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading products...
+                    </div>
+                </div>
             </div>
 
             <!-- Cart Tab -->
             <div id="cartTab" class="tab-content">
-                <div class="cart-section">
-                    <div class="cart-header">Shopping Cart</div>
-                    <div id="cartContent">
-                        <div class="loading">Loading cart...</div>
+                <div class="section-header">
+                    <h3>Shopping Cart</h3>
+                </div>
+                <div id="cartContent">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading cart...
                     </div>
                 </div>
             </div>
 
             <!-- Orders Tab -->
             <div id="ordersTab" class="tab-content">
-                <div>
-                    <h2>My Orders</h2>
-                    <div id="ordersList"></div>
+                <div class="section-header">
+                    <h3>My Orders</h3>
+                </div>
+                <div id="ordersList" class="orders-list">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading orders...
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Footer -->
+    <footer id="footer" style="display: none;">
+        <div class="footer-content">
+            <div class="footer-logo">Cymbal Shops</div>
+            <div class="footer-links">
+                <a href="#" onclick="switchTab('shop'); return false;">Shop</a>
+                <a href="#" onclick="switchTab('cart'); return false;">Cart</a>
+                <a href="#" onclick="switchTab('orders'); return false;">Orders</a>
+            </div>
+            <div style="font-size: 13px; color: rgba(255,255,255,0.7);">
+                Powered by Kubernetes Microservices
+            </div>
+        </div>
+    </footer>
 
     <script>
         const API_URL = '';
         let token = localStorage.getItem('token');
         let userId = localStorage.getItem('userId');
-        let cart = { items: [] };
+        let cartCount = 0;
+        let productsCache = {};
+
+        // Product emoji icons for visual appeal
+        const productIcons = {
+            'default': '📦',
+            'electronics': '📱',
+            'clothing': '👕',
+            'shoes': '👟',
+            'accessories': '⌚',
+            'home': '🏠',
+            'beauty': '💄',
+            'sports': '⚽'
+        };
+
+        // Product images (placeholder gradients with emoji)
+        function getProductImage(product) {
+            const colors = [
+                ['#667eea', '#764ba2'],
+                ['#f093fb', '#f5576c'],
+                ['#4facfe', '#00f2fe'],
+                ['#43e97b', '#38f9d7'],
+                ['#fa709a', '#fee140'],
+                ['#a8edea', '#fed6e3'],
+                ['#ff9a9e', '#fecfef'],
+                ['#ffecd2', '#fcb69f']
+            ];
+            const idx = Math.abs(hashCode(product.id)) % colors.length;
+            return colors[idx];
+        }
+
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return hash;
+        }
 
         // Initialize
         window.addEventListener('load', () => {
@@ -492,7 +946,7 @@
             const password = document.getElementById('authPassword').value;
             
             if (!email || !password) {
-                showAlert('authAlert', 'Email and password required', 'error');
+                showAlert('authAlert', 'Please enter email and password', 'error');
                 return;
             }
             
@@ -510,6 +964,7 @@
                 userId = data.user.id;
                 localStorage.setItem('token', token);
                 localStorage.setItem('userId', userId);
+                showToast('Account created successfully!', 'success');
                 showAppScreen();
                 loadProducts();
             } catch (err) {
@@ -522,7 +977,7 @@
             const password = document.getElementById('authPassword').value;
             
             if (!email || !password) {
-                showAlert('authAlert', 'Email and password required', 'error');
+                showAlert('authAlert', 'Please enter email and password', 'error');
                 return;
             }
             
@@ -540,6 +995,7 @@
                 userId = data.user.id;
                 localStorage.setItem('token', token);
                 localStorage.setItem('userId', userId);
+                showToast('Welcome back!', 'success');
                 showAppScreen();
                 loadProducts();
             } catch (err) {
@@ -555,32 +1011,44 @@
             document.getElementById('authEmail').value = '';
             document.getElementById('authPassword').value = '';
             showAuthScreen();
+            showToast('Signed out successfully', 'success');
         }
 
-        // UI
+        // UI Functions
         function showAuthScreen() {
             document.getElementById('authScreen').classList.add('active');
             document.getElementById('appScreen').classList.remove('active');
             document.getElementById('navLogout').style.display = 'none';
+            document.getElementById('cartLink').style.display = 'none';
             document.getElementById('userInfo').textContent = '';
+            document.getElementById('topBar').style.display = 'block';
+            document.getElementById('footer').style.display = 'none';
         }
 
         function showAppScreen() {
             document.getElementById('authScreen').classList.remove('active');
             document.getElementById('appScreen').classList.add('active');
             document.getElementById('navLogout').style.display = 'block';
-            document.getElementById('userInfo').textContent = `User: ${userId.slice(0, 8)}...`;
+            document.getElementById('cartLink').style.display = 'flex';
+            document.getElementById('topBar').style.display = 'block';
+            document.getElementById('footer').style.display = 'block';
+            
+            // Show truncated user ID
+            const userEmail = localStorage.getItem('userEmail') || `User ${userId.slice(0, 6)}`;
+            document.getElementById('userInfo').textContent = userEmail;
+        }
+
+        function goHome() {
+            switchTab('shop');
         }
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
-            
             document.getElementById(tab + 'Tab').classList.add('active');
-            event.target.classList.add('active');
             
             if (tab === 'orders') loadOrders();
             else if (tab === 'cart') loadCart();
+            else if (tab === 'shop') loadProducts();
         }
 
         function showAlert(elementId, message, type) {
@@ -589,33 +1057,104 @@
             alert.className = `alert ${type}`;
         }
 
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast show ${type}`;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function updateCartBadge(count) {
+            const badge = document.getElementById('cartBadge');
+            if (count > 0) {
+                badge.textContent = count;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
         // Products
         async function loadProducts() {
             try {
                 const res = await fetch(`${API_URL}/api/products/`);
                 const products = await res.json() || [];
                 
-                const html = products.map(p => `
-                    <div class="product-card">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-description">${p.description || 'No description'}</div>
-                        <div class="product-price">$${p.price.toFixed(2)}</div>
-                        <div class="product-stock">Stock: ${p.stock}</div>
-                        <div class="product-actions">
-                            <input type="number" class="qty" value="1" min="1" max="${p.stock}">
-                            <button onclick="addToCart('${p.id}', '${p.name}', ${p.price}, this)" style="flex:1;">Add to Cart</button>
-                        </div>
-                    </div>
-                `).join('');
+                products.forEach(p => productsCache[p.id] = p);
                 
-                document.getElementById('productsList').innerHTML = html || '<div class="loading">No products available</div>';
+                if (products.length === 0) {
+                    document.getElementById('productsList').innerHTML = `
+                        <div class="loading" style="grid-column: 1/-1;">
+                            No products available. Add some products to get started!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const html = products.map(p => {
+                    const colors = getProductImage(p);
+                    return `
+                        <div class="product-card">
+                            <div class="product-image-container" style="background: linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 100%);">
+                                <div class="product-image" style="display: flex; align-items: center; justify-content: center; font-size: 64px; color: white;">
+                                    ${getProductEmoji(p)}
+                                </div>
+                                <div class="product-image-overlay"></div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">${escapeHtml(p.name)}</div>
+                                <div class="product-description">${escapeHtml(p.description || 'Premium quality product')}</div>
+                                <div class="product-price">$${p.price.toFixed(2)}</div>
+                                <div class="product-stock">${p.stock > 0 ? `${p.stock} in stock` : 'Out of stock'}</div>
+                                <div class="product-actions">
+                                    <div class="quantity-select">
+                                        <select id="qty-${p.id}">
+                                            ${[1,2,3,4,5].map(n => `<option value="${n}">${n}</option>`).join('')}
+                                        </select>
+                                    </div>
+                                    <button class="cymbal-button-primary" onclick="addToCart('${p.id}')" ${p.stock <= 0 ? 'disabled style="opacity:0.5"' : ''}>
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('productsList').innerHTML = html;
             } catch (err) {
                 console.error('Error loading products:', err);
+                document.getElementById('productsList').innerHTML = `
+                    <div class="loading" style="grid-column: 1/-1; color: #721c24;">
+                        Failed to load products. Please try again.
+                    </div>
+                `;
             }
         }
 
-        async function addToCart(productId, name, price, button) {
-            const qty = parseInt(button.parentElement.querySelector('.qty').value);
+        function getProductEmoji(product) {
+            const name = (product.name || '').toLowerCase();
+            if (name.includes('phone') || name.includes('laptop') || name.includes('computer')) return '📱';
+            if (name.includes('shirt') || name.includes('dress') || name.includes('jacket')) return '👕';
+            if (name.includes('shoe') || name.includes('sneaker') || name.includes('boot')) return '👟';
+            if (name.includes('watch') || name.includes('ring') || name.includes('necklace')) return '⌚';
+            if (name.includes('chair') || name.includes('table') || name.includes('lamp')) return '🏠';
+            if (name.includes('makeup') || name.includes('perfume') || name.includes('cream')) return '💄';
+            if (name.includes('ball') || name.includes('gym') || name.includes('fitness')) return '⚽';
+            return '📦';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function addToCart(productId) {
+            const qty = parseInt(document.getElementById(`qty-${productId}`).value);
+            const product = productsCache[productId];
             
             try {
                 const res = await fetch(`${API_URL}/api/cart/items`, {
@@ -624,15 +1163,19 @@
                         'Content-Type': 'application/json',
                         'X-User-ID': userId
                     },
-                    body: JSON.stringify({ product_id: productId, quantity: qty, price })
+                    body: JSON.stringify({ 
+                        product_id: productId, 
+                        quantity: qty, 
+                        price: product.price 
+                    })
                 });
                 
                 if (!res.ok) throw new Error('Failed to add to cart');
                 
-                showAlert('cartAlert', `Added ${name} to cart!`, 'success');
-                setTimeout(() => loadCart(), 500);
+                showToast(`Added ${product.name} to cart!`, 'success');
+                loadCart();
             } catch (err) {
-                showAlert('cartAlert', err.message, 'error');
+                showToast(err.message, 'error');
             }
         }
 
@@ -645,35 +1188,89 @@
                 
                 const data = await res.json();
                 const items = data.items || [];
-                const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const shipping = subtotal > 50 ? 0 : 5.99;
+                const total = subtotal + shipping;
                 
-                const html = items.length === 0 
-                    ? '<div class="cart-empty">Your cart is empty</div>'
-                    : `
-                        <div id="cartAlert" class="alert"></div>
-                        <ul class="cart-items">
-                            ${items.map(item => `
-                                <li class="cart-item">
-                                    <div class="cart-item-info">
-                                        <div class="cart-item-name">${item.product_id}</div>
-                                        <div class="cart-item-qty">Qty: ${item.quantity}</div>
-                                    </div>
-                                    <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                                    <button onclick="removeFromCart('${item.id}')" class="danger">Remove</button>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <div class="cart-summary">
-                            <span>Total:</span>
-                            <span class="cart-total">$${total.toFixed(2)}</span>
-                        </div>
-                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                            <button onclick="clearCart()" class="danger">Clear Cart</button>
-                            <button onclick="checkout(${total})" class="success" style="flex:1;">Checkout</button>
+                updateCartBadge(items.length);
+                
+                if (items.length === 0) {
+                    document.getElementById('cartContent').innerHTML = `
+                        <div class="cart-section">
+                            <div class="cart-empty">
+                                <div style="font-size: 64px; margin-bottom: 16px;">🛒</div>
+                                <h4>Your shopping cart is empty!</h4>
+                                <p>Items you add to your shopping cart will appear here.</p>
+                                <button class="cymbal-button-primary" onclick="switchTab('shop')" style="margin-top: 24px;">
+                                    Continue Shopping
+                                </button>
+                            </div>
                         </div>
                     `;
-                
-                document.getElementById('cartContent').innerHTML = html;
+                    return;
+                }
+
+                document.getElementById('cartContent').innerHTML = `
+                    <div class="cart-layout">
+                        <div class="cart-section">
+                            <div class="cart-header">
+                                <h3>Cart (${items.length})</h3>
+                                <div style="display: flex; gap: 12px;">
+                                    <button class="cymbal-button-secondary cymbal-button-small" onclick="clearCart()">
+                                        Empty Cart
+                                    </button>
+                                    <button class="cymbal-button-primary cymbal-button-small" onclick="switchTab('shop')">
+                                        Continue Shopping
+                                    </button>
+                                </div>
+                            </div>
+                            ${items.map(item => {
+                                const product = productsCache[item.product_id] || { name: item.product_id };
+                                const colors = getProductImage({ id: item.product_id });
+                                return `
+                                    <div class="cart-item">
+                                        <div class="cart-item-image" style="background: linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 100%); color: white;">
+                                            ${getProductEmoji(product)}
+                                        </div>
+                                        <div class="cart-item-details">
+                                            <div class="cart-item-name">${escapeHtml(product.name || item.product_id)}</div>
+                                            <div class="cart-item-sku">SKU #${item.product_id.slice(0, 8)}</div>
+                                            <div class="cart-item-qty">Quantity: ${item.quantity}</div>
+                                            <div class="cart-item-actions">
+                                                <button class="cymbal-button-secondary cymbal-button-small" onclick="removeFromCart('${item.id}')">
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        
+                        <div class="cart-summary-section">
+                            <h3 style="margin-bottom: 24px;">Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span>$${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span>${shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>$${total.toFixed(2)}</span>
+                            </div>
+                            <button class="cymbal-button-primary" onclick="checkout(${total})" style="width: 100%; margin-top: 24px; padding: 14px;">
+                                Place Order
+                            </button>
+                            <p style="text-align: center; font-size: 13px; color: #605f64; margin-top: 16px;">
+                                🔒 Secure checkout
+                            </p>
+                        </div>
+                    </div>
+                `;
             } catch (err) {
                 console.error('Error loading cart:', err);
             }
@@ -687,14 +1284,15 @@
                 });
                 
                 if (!res.ok) throw new Error('Failed to remove item');
+                showToast('Item removed from cart', 'success');
                 loadCart();
             } catch (err) {
-                alert('Error: ' + err.message);
+                showToast(err.message, 'error');
             }
         }
 
         async function clearCart() {
-            if (!confirm('Clear entire cart?')) return;
+            if (!confirm('Are you sure you want to empty your cart?')) return;
             try {
                 const res = await fetch(`${API_URL}/api/cart/`, {
                     method: 'DELETE',
@@ -702,14 +1300,15 @@
                 });
                 
                 if (!res.ok) throw new Error('Failed to clear cart');
+                showToast('Cart cleared', 'success');
                 loadCart();
             } catch (err) {
-                alert('Error: ' + err.message);
+                showToast(err.message, 'error');
             }
         }
 
         async function checkout(total) {
-            if (!confirm(`Confirm checkout for $${total.toFixed(2)}?`)) return;
+            if (!confirm(`Confirm your order for $${total.toFixed(2)}?`)) return;
             
             try {
                 const res = await fetch(`${API_URL}/api/cart/`, {
@@ -729,13 +1328,18 @@
                 if (!orderRes.ok) throw new Error('Failed to create order');
                 
                 const order = await orderRes.json();
-                alert(`Order created! ID: ${order.id}\nTotal: $${order.total.toFixed(2)}`);
+                showToast(`Order placed! ID: ${order.id.slice(0, 8)}`, 'success');
                 
-                await clearCart();
-                loadOrders();
-                switchTab('orders');
+                // Clear cart silently
+                await fetch(`${API_URL}/api/cart/`, {
+                    method: 'DELETE',
+                    headers: { 'X-User-ID': userId }
+                });
+                
+                loadCart();
+                setTimeout(() => switchTab('orders'), 1000);
             } catch (err) {
-                alert('Error: ' + err.message);
+                showToast(err.message, 'error');
             }
         }
 
@@ -748,48 +1352,97 @@
                 
                 const orders = await res.json() || [];
                 
-                const html = orders.length === 0
-                    ? '<div class="loading">No orders yet</div>'
-                    : orders.map(order => `
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div>
-                                    <div class="order-id">Order #${order.id.slice(0, 8)}</div>
-                                    <div style="font-size: 0.85rem; color: #7f8c8d;">Created: ${new Date(order.created_at).toLocaleString()}</div>
-                                </div>
-                                <div>
-                                    <span class="order-status status-${order.status.toLowerCase()}">${order.status.toUpperCase()}</span>
-                                </div>
-                            </div>
-                            <ul class="order-items">
-                                ${(order.items || []).map(item => `
-                                    <li class="order-item">
-                                        ${item.product_id} × ${item.quantity} @ $${item.price.toFixed(2)}
-                                    </li>
-                                `).join('')}
-                            </ul>
-                            <div class="order-total">Total: $${order.total.toFixed(2)}</div>
-                            <div style="margin-top: 1rem;">
-                                <button onclick="checkPaymentStatus('${order.id}')" style="width: 100%;">Check Payment Status</button>
+                if (orders.length === 0) {
+                    document.getElementById('ordersList').innerHTML = `
+                        <div class="cart-section">
+                            <div class="cart-empty">
+                                <div style="font-size: 64px; margin-bottom: 16px;">📋</div>
+                                <h4>No orders yet</h4>
+                                <p>When you place orders, they will appear here.</p>
+                                <button class="cymbal-button-primary" onclick="switchTab('shop')" style="margin-top: 24px;">
+                                    Start Shopping
+                                </button>
                             </div>
                         </div>
-                    `).join('');
+                    `;
+                    return;
+                }
+                
+                const html = orders.map(order => `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <div class="order-id">Order #${order.id.slice(0, 8).toUpperCase()}</div>
+                                <div class="order-date">${new Date(order.created_at).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}</div>
+                            </div>
+                            <span class="order-status status-${order.status.toLowerCase()}">${formatStatus(order.status)}</span>
+                        </div>
+                        <div class="order-body">
+                            <ul class="order-items">
+                                ${(order.items || []).map(item => {
+                                    const product = productsCache[item.product_id] || { name: item.product_id };
+                                    return `
+                                        <li class="order-item">
+                                            <span>${escapeHtml(product.name || item.product_id)} × ${item.quantity}</span>
+                                            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                        </li>
+                                    `;
+                                }).join('')}
+                            </ul>
+                            <div class="order-total">
+                                <span>Total</span>
+                                <span>$${order.total.toFixed(2)}</span>
+                            </div>
+                            <div class="order-actions">
+                                <button class="cymbal-button-secondary cymbal-button-small" onclick="checkPaymentStatus('${order.id}')">
+                                    Check Payment Status
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
                 
                 document.getElementById('ordersList').innerHTML = html;
             } catch (err) {
                 console.error('Error loading orders:', err);
-                document.getElementById('ordersList').innerHTML = '<div class="error-box">Failed to load orders</div>';
+                document.getElementById('ordersList').innerHTML = `
+                    <div class="cart-section" style="background: #f8d7da; color: #721c24;">
+                        Failed to load orders. Please try again.
+                    </div>
+                `;
             }
+        }
+
+        function formatStatus(status) {
+            const statusMap = {
+                'pending': '⏳ Pending',
+                'completed': '✅ Completed',
+                'failed': '❌ Failed'
+            };
+            return statusMap[status.toLowerCase()] || status;
         }
 
         async function checkPaymentStatus(orderId) {
             try {
                 const res = await fetch(`${API_URL}/api/payments/${orderId}`);
-                const payment = await res.json();
                 
-                alert(`Payment Status:\nOrder: ${orderId.slice(0, 8)}\nStatus: ${payment.status}\nAmount: $${payment.amount.toFixed(2)}`);
+                if (!res.ok) {
+                    showToast('Payment is still processing...', '');
+                    return;
+                }
+                
+                const payment = await res.json();
+                const statusEmoji = payment.status === 'completed' ? '✅' : payment.status === 'failed' ? '❌' : '⏳';
+                showToast(`${statusEmoji} Payment ${payment.status}: $${payment.amount.toFixed(2)}`, payment.status === 'completed' ? 'success' : '');
+                loadOrders(); // Refresh orders to show updated status
             } catch (err) {
-                alert('Payment not found or processing...');
+                showToast('Payment status not available yet', '');
             }
         }
     </script>
