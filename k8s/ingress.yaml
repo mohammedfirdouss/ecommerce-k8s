@@ -10,13 +10,6 @@ spec:
   rules:
     - http:
         paths:
-          - path: /ui(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: ui
-                port:
-                  number: 80
           - path: /api/auth(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -52,3 +45,17 @@ spec:
                 name: payment-service
                 port:
                   number: 8085
+          - path: /ui(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ui
+                port:
+                  number: 80
+          - path: /(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ui
+                port:
+                  number: 80

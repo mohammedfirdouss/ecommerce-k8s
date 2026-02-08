@@ -942,8 +942,8 @@
 
         // Auth
         async function register() {
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
             
             if (!email || !password) {
                 showAlert('authAlert', 'Please enter email and password', 'error');
@@ -973,8 +973,8 @@
         }
 
         async function login() {
-            const email = document.getElementById('authEmail').value;
-            const password = document.getElementById('authPassword').value;
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
             
             if (!email || !password) {
                 showAlert('authAlert', 'Please enter email and password', 'error');
