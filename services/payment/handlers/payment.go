@@ -96,8 +96,7 @@ func (h *PaymentHandler) processPayment(event models.OrderEvent) {
 
 	// Store payment record
 	_, err := h.DB.Exec(
-		`INSERT INTO payment.payments (order_id, amount, status) VALUES ($1, $2, $3)
-		 ON CONFLICT (order_id) DO UPDATE SET status = $3, updated_at = NOW()`,
+		`INSERT INTO payment.payments (order_id, amount, status) VALUES ($1, $2, $3)`,
 		event.OrderID, event.Total, status,
 	)
 	if err != nil {
