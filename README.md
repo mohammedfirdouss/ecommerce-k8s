@@ -1,6 +1,30 @@
 # E-Commerce Microservices on Kubernetes
 
-A microservices-based e-commerce application built with **Go**, deployed on **Kubernetes** using **Kind**, with **PostgreSQL**, **RabbitMQ**, **Prometheus**, and **Grafana**.
+A microservices-based e-commerce application built with **Go**, deployed on **Kubernetes** using **Kind**, with **PostgreSQL**, **RabbitMQ**, **Prometheus**, **Grafana**, and **ArgoCD** for GitOps.
+
+## Screenshots
+
+### Web UI — Login & Product Catalog
+
+| Login Page | Product Catalog |
+|:---:|:---:|
+| ![Login](docs/images/01-login-page.png) | ![Products](docs/images/02-product-catalog.png) |
+
+### Shopping Cart & Order Tracking
+
+| Shopping Cart | Orders |
+|:---:|:---:|
+| ![Cart](docs/images/03-shopping-cart.png) | ![Orders](docs/images/04-orders.png) |
+
+### GitOps — ArgoCD Dashboard
+
+| App of Apps Overview | Monitoring & Services |
+|:---:|:---:|
+| ![ArgoCD Apps](docs/images/05-argocd-apps.png) | ![ArgoCD Monitoring](docs/images/06-argocd-monitoring-services.png) |
+
+| Services Sync Tree (Healthy & Synced) |
+|:---:|
+| ![ArgoCD Tree](docs/images/07-argocd-services-tree.png) |
 
 ## Architecture
 
@@ -199,6 +223,10 @@ ArgoCD watches the `k8s/base/` directory structure:
 Three ArgoCD Applications are managed via an **App of Apps** pattern:
 1. **ecommerce-infra** — Infrastructure layer (sync wave 1)
 2. **ecommerce-services** — Microservices layer (sync wave 2)
+3. **ecommerce-monitoring** — Observability layer (sync wave 3)
+
+![ArgoCD Applications](docs/images/05-argocd-apps.png)
+![ArgoCD Services Sync](docs/images/07-argocd-services-tree.png)
 3. **ecommerce-monitoring** — Observability layer (sync wave 3)
 
 ### Setup GitOps
