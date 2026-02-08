@@ -46,6 +46,56 @@ make test
 make clean
 ```
 
+## Accessing the Application
+
+After deployment, use port-forwarding to access the services:
+
+### Web UI (Recommended)
+```bash
+# Start port-forward for the web UI
+kubectl port-forward -n ecommerce svc/ui 8080:80
+```
+Then open: **http://localhost:8080**
+
+### Full Application (UI + APIs via Ingress)
+```bash
+# Start port-forward for the Ingress controller
+kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
+```
+Then access:
+- **Web UI**: http://localhost:8080/ui/
+- **APIs**: http://localhost:8080/api/{auth,products,cart,orders,payments}/
+
+### Monitoring
+```bash
+# Prometheus (metrics)
+kubectl port-forward -n ecommerce svc/prometheus 9090:9090
+
+# Grafana (dashboards) - login: admin/admin
+kubectl port-forward -n ecommerce svc/grafana 3000:3000
+```
+
+### GitHub Codespaces / Remote Environments
+If running in GitHub Codespaces or a remote environment:
+1. Run the port-forward command
+2. Go to the **PORTS** tab in VS Code
+3. Find port `8080` and click the globe icon to open in browser
+
+### Quick Access Commands
+```bash
+# Check all pods are running
+kubectl get pods -n ecommerce
+
+# View service endpoints
+kubectl get svc -n ecommerce
+
+# View ingress configuration
+kubectl get ingress -n ecommerce
+
+# Tail logs from a service
+kubectl logs -f -n ecommerce deployment/auth-service
+```
+
 ## API Endpoints
 
 All endpoints are accessible via the Ingress at `http://localhost`.
