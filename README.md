@@ -4,6 +4,7 @@ A microservices-based e-commerce application built with **Go**, deployed on **Ku
 
 ## Screenshots
 
+
 ### Web UI — Login & Product Catalog
 
 | Login Page | Product Catalog |
